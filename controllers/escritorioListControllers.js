@@ -1,6 +1,6 @@
 angular.module("brEscritorios")
 	.constant("productListActiveClass", "btn-primary")
-	.constant("productListPageCount", 3)
+	.constant("productListPageCount", 10)
 	.controller("escritoriosListCtrl", function ($scope, $filter, productListActiveClass, productListPageCount) {
 		
 		var selectedCategory = null;

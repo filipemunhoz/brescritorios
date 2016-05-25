@@ -18,6 +18,34 @@ angular.module("customFilters", [])
 		}
 	})
 
+
+	.filter("uniqueCategoria", function () {
+		return function (data, propertyName) {
+			console.log(angular.isArray(data) + " - " + angular.isString(propertyName));
+			if (angular.isArray(data) && angular.isString(propertyName)) {
+				var results = [];
+				var keys = {};
+
+				for (var i = 0; i < data.length; i++) {		
+					var categoria = data[i][propertyName];
+					
+					for(var j=0; j < categoria.length; j++){
+						console.log("categoria= " + categoria[j]);
+
+						if (angular.isUndefined(keys[j])) {
+							keys[j] = true;
+
+							results.push(categoria[j]);
+						}
+					}
+				}
+				return results;
+			} else {
+				return data;
+			}
+		}
+	})
+
 	.filter("uniqueDate", function ($filter) {
 		return function (data, propertyName) {
 			//console.log(angular.isArray(data) + " - " + angular.isNumber(propertyName));
@@ -63,7 +91,7 @@ angular.module("customFilters", [])
 	    };
 	})	 	
 
-.filter("range", function ($filter) {
+	.filter("range", function ($filter) {
 		return function (data, page, size) {
 			//console.log("page= " + page + " - size= " + size);
 			if (angular.isArray(data) && angular.isNumber(page) && angular.isNumber(size)) {
